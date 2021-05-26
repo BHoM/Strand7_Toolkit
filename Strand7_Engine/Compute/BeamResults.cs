@@ -52,10 +52,8 @@ namespace BH.Engine.Strand7
                 beamIds = Enumerable.Range(1, beamCount).ToList();
             }
             else
-            {
-            
-                beamIds = beams.Select(bar => st7Adapter.GetAdapterId<int>(bar)).ToList();
-                //beamIds = beams.Select(bar => (int)bar.CustomData["Strand7_id"]).ToList();
+            {            
+                beamIds = beams.Select(bar => st7Adapter.GetAdapterId<int>(bar)).ToList();               
             }
             List<List<double>> positionResults = new List<List<double>>();
             List<List<double>> valuesResults = new List<List<double>>();
@@ -95,19 +93,13 @@ namespace BH.Engine.Strand7
         }
 
 
-        public static BeamResults St7GetBeamResultsAtT(List<int> caseIds, List<Bar> beams, List<double> length_params, St7ResultForceComponent component, St7BeamResultsTypes resultType = St7BeamResultsTypes.BeamForce, St7BeamResultAxis resultAxis = St7BeamResultAxis.Principal, bool active = false)
+        public static BeamResults St7GetBeamResultsAtT(BHoMAdapter st7Adapter, List<int> caseIds, List<Bar> beams, List<double> t_params, St7ResultForceComponent component, St7BeamResultsTypes resultType = St7BeamResultsTypes.BeamForce, St7BeamResultAxis resultAxis = St7BeamResultAxis.Principal, bool active = false)
         {
 
             if (!active) return null;
             int err;
             int uID = 1;
-
-            //// checking node ids
-            //if (length_params.Count != beams.Count)
-            //{
-            //    BHError("Number of length parameters is " + length_params.Count + " doen't match the number of beams " + beams.Count);
-            //}
-
+            err = St7.St7SetBeamResultPosMode(uID, St7.bpParam);
             List<List<double>> valuesResults = new List<List<double>>();
             List<List<int>> resultsPerStation = new List<List<int>>();
             // output from strand 7
@@ -115,12 +107,17 @@ namespace BH.Engine.Strand7
             double[] beamResult = new double[St7.kMaxBeamResult];
             int numStations = 1;
             int numColumns = 0;
-
+        
             for (int i = 0; i < beams.Count; i++)
             {
                 Bar beam = beams[i];
-                double[] beamPos = length_params.ToArray();
-                int beamId = (int)beam.CustomData["Strand7_id"];
+                double[] beamPos;
+                if (i > t_params.Count - 1)
+                {
+                    beamPos = new double[] { t_params[t_params.Count-1] };
+                }
+                else beamPos = new double[] { t_params[i] };
+                int beamId = st7Adapter.GetAdapterId<int>(beam);             
 
                 List<double> interValues = new List<double>();
                 List<int> interResPerStation = new List<int>();

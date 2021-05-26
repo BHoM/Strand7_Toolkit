@@ -20,6 +20,7 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
  */
 
+using BH.Adapter;
 using BH.oM.Adapter.Strand7;
 using BH.oM.Structure.Elements;
 using BH.oM.Structure.Results;
@@ -35,7 +36,7 @@ namespace BH.Engine.Strand7
 {
     public static partial class Compute
     {
-        public static List<List<double>> St7GetNodeResults(List<int> caseIds, St7NodeResultsTypes resultType, St7NodeResultComponent component, List<Node> nodes, bool active = false)
+        public static List<List<double>> St7GetNodeResults(BHoMAdapter st7Adapter, List<int> caseIds, St7NodeResultsTypes resultType, St7NodeResultComponent component, List<Node> nodes, bool active = false)
         {
             List<List<double>> results = new List<List<double>>();
 
@@ -48,8 +49,8 @@ namespace BH.Engine.Strand7
             foreach (Node node in nodes)
             {
                 int UCSid = 1;
-                int nodeId = (int)node.CustomData["Strand7_id"];
-                if (node.Support != null && node.Support.CustomData.ContainsKey("Strand7_id")) UCSid = (int)node.Support.CustomData["Strand7_id"];
+                int nodeId = st7Adapter.GetAdapterId<int>(node);     
+                if (node.Support != null) UCSid = st7Adapter.GetAdapterId<int>(node.Support);
                 var interResults = new List<double>();
                 foreach (int loadcaseId in caseIds)
                 {
