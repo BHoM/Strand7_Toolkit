@@ -36,20 +36,20 @@ namespace BH.Engine.Strand7
         {
             if (code == St7.ERR7_NoError) return true;
             StringBuilder errorSb = new StringBuilder(St7.kMaxStrLen);
-            if (St7.ERR7_NoError == St7.St7GetAPIErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Reflection.Compute.RecordError(errorSb.ToString());
-            else if (St7.ERR7_NoError == St7.St7GetSolverErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Reflection.Compute.RecordError(errorSb.ToString());
+            if (St7.ERR7_NoError == St7.St7GetAPIErrorString(code, errorSb, St7.kMaxStrLen)) Engine.Base.Compute.RecordError(errorSb.ToString());
+            else if (St7.ERR7_NoError == St7.St7GetSolverErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Base.Compute.RecordError(errorSb.ToString());
             return false;
         }
         private static void BHError(string errorString)
         {
-            BH.Engine.Reflection.Compute.RecordError(errorString);
+            BH.Engine.Base.Compute.RecordError(errorString);
         }
         private static bool St7ErrorCustom(int code, string customString)
         {
             if (code == St7.ERR7_NoError) return true;
             StringBuilder errorSb = new StringBuilder(St7.kMaxStrLen);
-            if (St7.ERR7_NoError == St7.St7GetAPIErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Reflection.Compute.RecordError(errorSb.ToString() + ". " + customString);
-            else if (St7.ERR7_NoError == St7.St7GetSolverErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Reflection.Compute.RecordError(errorSb.ToString() + ". " + customString);
+            if (St7.ERR7_NoError == St7.St7GetAPIErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Base.Compute.RecordError(errorSb.ToString() + ". " + customString);
+            else if (St7.ERR7_NoError == St7.St7GetSolverErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Base.Compute.RecordError(errorSb.ToString() + ". " + customString);
             return false;
         }
 
@@ -57,8 +57,8 @@ namespace BH.Engine.Strand7
         {
             if (code == St7.ERR7_NoError) return true;
             StringBuilder errorSb = new StringBuilder(St7.kMaxStrLen);
-            if (St7.ERR7_NoError == St7.St7GetAPIErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Reflection.Compute.RecordNote(errorSb.ToString() + ". " + customString);
-            else if (St7.ERR7_NoError == St7.St7GetSolverErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Reflection.Compute.RecordNote(errorSb.ToString() + ". " + customString);
+            if (St7.ERR7_NoError == St7.St7GetAPIErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Base.Compute.RecordNote(errorSb.ToString() + ". " + customString);
+            else if (St7.ERR7_NoError == St7.St7GetSolverErrorString(code, errorSb, St7.kMaxStrLen)) BH.Engine.Base.Compute.RecordNote(errorSb.ToString() + ". " + customString);
             return false;
         }
     }

@@ -26,7 +26,7 @@ using BH.oM.Base;
 using BH.oM.Dimensional;
 using BH.oM.Structure.Elements;
 using BH.oM.Structure.Loads;
-using BH.oM.Reflection.Attributes;
+using BH.oM.Base.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

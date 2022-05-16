@@ -26,7 +26,6 @@ using BH.oM.Base;
 using BH.oM.Dimensional;
 using BH.oM.Structure.Elements;
 using BH.oM.Structure.Loads;
-using BH.oM.Reflection.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +34,7 @@ using System.Threading.Tasks;
 using BH.oM.Geometry.CoordinateSystem;
 using BH.oM.Structure.Constraints;
 using System.ComponentModel;
+using BH.oM.Base.Attributes;
 
 namespace BH.Engine.Strand7.Create
 {

@@ -60,7 +60,7 @@ namespace BH.Adapter.Strand7
                 if (!St7ErrorCustom(err, "Could not get nodes for a beam " + beamId.ToString())) continue;                       
                 if (bmNodes[0] != 2)    // checking number of nodes bmNodes[0]   
                 {
-                    BH.Engine.Reflection.Compute.RecordError("Number of nodes doesn't equal 2 for beam N: " + beamId.ToString());
+                    BH.Engine.Base.Compute.RecordError("Number of nodes doesn't equal 2 for beam N: " + beamId.ToString());
                     return beams;
                 }
                 Node nd1 = allNodes[bmNodes[1]];

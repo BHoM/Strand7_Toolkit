@@ -1,220 +1,99 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+ <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33D9A208-6554-461E-A6F1-3A777719FEFB}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>5.0.0</Version>
+    <Authors>BHoM</Authors>
+    <Copyright>Copyright © https://github.com/BHoM</Copyright>
     <RootNamespace>BH.Adapter.Strand7</RootNamespace>
-    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <FileVersion>5.2.0.0</FileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\Build\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\Build\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Label="TemplateBuilder">
-    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.1.6.1\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\Build\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)$(TargetFileName)&quot;  &quot;C:\ProgramData\BHoM\Assemblies&quot; /Y" />
+  </Target>
+
   <ItemGroup>
-    <Reference Include="Adapter_Engine, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Strand7_Engine\Strand7_Engine.csproj" />
+    <ProjectReference Include="..\Strand7_oM\Strand7_oM.csproj" />
+  </ItemGroup>
+
+   <ItemGroup>
+    <Reference Include="Adapter_Engine">
       <HintPath>C:\ProgramData\BHoM\Assemblies\Adapter_Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Adapter_oM, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Adapter_oM">
       <HintPath>C:\ProgramData\BHoM\Assemblies\Adapter_oM.dll</HintPath>
     </Reference>
-    <Reference Include="Analytical_Engine, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Analytical_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Analytical_oM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Analytical_oM">
       <HintPath>C:\ProgramData\BHoM\Assemblies\Analytical_oM.dll</HintPath>
+      <Private>false</Private>
+      <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="BHoM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+   <Reference Include="BHoM">
       <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM.dll</HintPath>
+      <Private>false</Private>
+      <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="BHoM_Adapter, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM_Adapter.dll</HintPath>
-    </Reference>
-    <Reference Include="BHoM_Engine, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="BHoM_UI, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM_UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Data_oM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Data_oM.dll</HintPath>
-    </Reference>
-    <Reference Include="Dimensional_oM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+   <Reference Include="BHoM_Adapter">
+     <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM_Adapter.dll</HintPath>
+   </Reference>
+   <Reference Include="BHoM_Engine">
+     <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM_Engine.dll</HintPath>
+   </Reference>
+   <Reference Include="Data_Engine">
+     <HintPath>C:\ProgramData\BHoM\Assemblies\Data_Engine.dll</HintPath>
+   </Reference>
+   <Reference Include="Data_oM">
+     <HintPath>C:\ProgramData\BHoM\Assemblies\Data_oM.dll</HintPath>
+   </Reference>
+   <Reference Include="Dimensional_oM">
       <HintPath>C:\ProgramData\BHoM\Assemblies\Dimensional_oM.dll</HintPath>
+      <Private>false</Private>
+      <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="Geometry_Engine, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Geometry_oM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+   <Reference Include="Geometry_Engine">
+     <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_Engine.dll</HintPath>
+   </Reference>
+     <Reference Include="Geometry_oM">
       <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_oM.dll</HintPath>
+      <Private>false</Private>
+      <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="Physical_Engine, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Physical_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Physical_oM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Physical_oM.dll</HintPath>
-    </Reference>
-    <Reference Include="Reflection_Engine, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Reflection_oM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_oM.dll</HintPath>
-    </Reference>
-    <Reference Include="Spatial_Engine">
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Spatial_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Spatial_oM, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="Strand7_Engine, Version=2.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Strand7_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Strand7_oM, Version=2.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Strand7_oM.dll</HintPath>
-    </Reference>
-    <Reference Include="Structure_Engine, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\ProgramData\BHoM\Assemblies\Structure_Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Structure_oM, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+     <Reference Include="Physical_Engine">
+       <HintPath>C:\ProgramData\BHoM\Assemblies\Physical_Engine.dll</HintPath>
+     </Reference>
+     <Reference Include="Physical_oM">
+       <HintPath>C:\ProgramData\BHoM\Assemblies\Physical_oM.dll</HintPath>
+     </Reference>
+     <Reference Include="Spatial_Engine">
+       <HintPath>C:\ProgramData\BHoM\Assemblies\Spatial_Engine.dll</HintPath>
+     </Reference>
+     <Reference Include="Structure_Engine">
+       <HintPath>C:\ProgramData\BHoM\Assemblies\Structure_Engine.dll</HintPath>
+     </Reference>   
+   <Reference Include="Structure_oM">
       <HintPath>C:\ProgramData\BHoM\Assemblies\Structure_oM.dll</HintPath>
+      <Private>false</Private>
+      <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="Spatial_oM">
+      <HintPath>C:\ProgramData\BHoM\Assemblies\Spatial_oM.dll</HintPath>
+      <Private>false</Private>
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>    
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Create\FEMesh.cs" />
-    <Compile Include="Create\Loads\BarPreLoad.cs" />
-    <Compile Include="Create\RigidMPLink.cs" />
-    <Compile Include="Create\Stage.cs" />
-    <Compile Include="Create\Loads\AreaLoad.cs" />
-    <Compile Include="Create\Loads\BarDistributedMass.cs" />
-    <Compile Include="Create\Group.cs" />
-    <Compile Include="Create\Panel.cs" />
-    <Compile Include="Create\Bar.cs" />
-    <Compile Include="Create\Loads\GravityLoad.cs" />
-    <Compile Include="Create\Loads\BarPointLoad.cs" />
-    <Compile Include="Create\Loads\LoadCombination.cs" />
-    <Compile Include="Create\Loads\LoadCase.cs" />
-    <Compile Include="Create\Loads\NodeLoad.cs" />
-    <Compile Include="Create\Material.cs" />
-    <Compile Include="Create\Loads\BarDistributedLoad.cs" />
-    <Compile Include="Create\Node.cs" />
-    <Compile Include="Create\SurfaceProperty.cs" />
-    <Compile Include="Create\SectionProperty.cs" />
-    <Compile Include="Create\_Create.cs" />
-    <Compile Include="Delete\_Delete.cs" />
-    <Compile Include="Execute\_Execute.cs" />
-    <Compile Include="Read\Loads\BarDistributedMass.cs" />
-    <Compile Include="Read\Loads\BarDistributedLoad.cs" />
-    <Compile Include="Read\Loads\GravityLoad.cs" />
-    <Compile Include="Read\Loads\BarPointLoad.cs" />
-    <Compile Include="Read\Loads\LoadCombination.cs" />
-    <Compile Include="Read\Loads\AreaLoad.cs" />
-    <Compile Include="Read\Loads\NodeLoad.cs" />
-    <Compile Include="Read\Loads\LoadCase.cs" />
-    <Compile Include="Read\Group.cs" />
-    <Compile Include="Read\Panel.cs" />
-    <Compile Include="Read\Mesh.cs" />
-    <Compile Include="Read\Results\NodeResult.cs" />
-    <Compile Include="Read\Results\Result.cs" />
-    <Compile Include="Read\SurfaceProperty.cs" />
-    <Compile Include="Types\NextId.cs" />
-    <Compile Include="Read\Bar.cs" />
-    <Compile Include="Read\Material.cs" />
-    <Compile Include="Read\Node.cs" />
-    <Compile Include="Read\SectionProperty.cs" />
-    <Compile Include="Read\_Read.cs" />
-    <Compile Include="Update\_UpdateObjects.cs" />
-    <Compile Include="Strand7Adapter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types\Comparer.cs" />
-    <Compile Include="Types\DependencyTypes.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Properties\template-builder.props" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(TemplateBuilderTargets)" Condition="Exists('$(TemplateBuilderTargets)')" Label="TemplateBuilder" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)$(TargetFileName)"  "C:\\ProgramData\\BHoM\\Assemblies" /Y</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
