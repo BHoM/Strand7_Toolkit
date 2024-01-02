@@ -1,5 +1,4 @@
 /*
-/*
  * Copyright (c) 2015 - 2024, the respective contributors. All rights reserved.
  * Copyright (c) 2015 - 2021, the respective contributors. All rights reserved.
  *
