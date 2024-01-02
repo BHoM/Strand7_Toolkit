@@ -1,6 +1,6 @@
 /*
 /*
- * Copyright (c) 2015 - 2023, the respective contributors. All rights reserved.
+ * Copyright (c) 2015 - 2024, the respective contributors. All rights reserved.
  * Copyright (c) 2015 - 2021, the respective contributors. All rights reserved.
  *
  * Each contributor holds copyright over their respective contributions.
@@ -87,4 +87,5 @@ namespace BH.Adapter.Strand7
 
     }
 }
+
 
