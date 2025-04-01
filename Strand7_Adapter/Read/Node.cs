@@ -65,17 +65,17 @@ namespace BH.Adapter.Strand7
                 int[] restraints = new int[6];
                 double[] enforcedDispls = new double[6];
                 List<bool> bhFixed = new List<bool>();
-                err = St7.St7GetNodeRestraint6(1, nodeId, 1, ref ucsId, restraints, enforcedDispls);                    
+                err = St7.St7GetNodeRestraint6(1, nodeId, 1, ref ucsId, restraints, enforcedDispls);
                 bhFixed = restraints.Select(rst => rst == St7.btTrue).ToList();
                 double[] translationStiff = new double[3];
-                err = St7.St7GetNodeKTranslation3F(1, nodeId, 1, ref ucsId, translationStiff);               
+                err = St7.St7GetNodeKTranslation3F(1, nodeId, 1, ref ucsId, translationStiff);
                 double[] rotationStiff = new double[3];
-                err = St7.St7GetNodeKRotation3F(1, nodeId, 1, ref ucsId, rotationStiff);             
+                err = St7.St7GetNodeKRotation3F(1, nodeId, 1, ref ucsId, rotationStiff);
                 List<double> stiffnessVals = new List<double>();
                 stiffnessVals.AddRange(translationStiff);
                 stiffnessVals.AddRange(rotationStiff);
                 Constraint6DOF bhRestraint = BH.Engine.Structure.Create.Constraint6DOF("", bhFixed, stiffnessVals);
-                Node bhNode = BH.Engine.Structure.Create.Node(BH.Engine.Geometry.Create.Point(XYZ[0], XYZ[1], XYZ[2]),"", bhRestraint);
+                Node bhNode = new Node { Position = BH.Engine.Geometry.Create.Point(XYZ[0], XYZ[1], XYZ[2]), Support = bhRestraint};
                 SetAdapterId(bhNode, nodeId);             
                 nodes.Add(bhNode);
             }

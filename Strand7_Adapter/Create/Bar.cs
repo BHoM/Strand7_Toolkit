@@ -45,8 +45,8 @@ namespace BH.Adapter.Strand7
             int secPropId = GetAdapterId<int>(bar.SectionProperty);         
             int[] beamNodes = new int[St7.kMaxElementNode + 1];
             beamNodes[0] = 2;
-            beamNodes[1] = GetAdapterId<int>(bar.StartNode);
-            beamNodes[2] = GetAdapterId<int>(bar.EndNode);
+            beamNodes[1] = GetAdapterId<int>(bar.Start);
+            beamNodes[2] = GetAdapterId<int>(bar.End);
      
             // geometry
             err = St7.St7SetElementConnection(uID, St7.tyBEAM, barId, secPropId, beamNodes);

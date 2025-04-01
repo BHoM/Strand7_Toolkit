@@ -29,10 +29,12 @@ using System.Threading.Tasks;
 using BH.oM.Structure.Elements;
 using BH.oM.Structure.SectionProperties;
 using BH.oM.Structure.Constraints;
+using BH.Engine.Structure;
 using St7API;
 using BH.oM.Geometry;
 using BH.Engine.Geometry;
 using static System.Math;
+using System.Xml.Linq;
 
 namespace BH.Adapter.Strand7
 {
@@ -105,8 +107,9 @@ namespace BH.Adapter.Strand7
                 List<double> stiffnessValsEnd = stiffTranslationEnd.Concat(stiffRotationEnd).ToList();
                 Constraint6DOF startRelease = BH.Engine.Structure.Create.Constraint6DOF("", beamStartRestraint, stiffnessValsStart);
                 Constraint6DOF endRelease = BH.Engine.Structure.Create.Constraint6DOF("", beamEndRestraint, stiffnessValsEnd);
-                BarRelease barRelease = BH.Engine.Structure.Create.BarRelease(startRelease, endRelease);
-                Bar bar = BH.Engine.Structure.Create.Bar(nd1, nd2, prop, orientationAngle[0] * System.Math.PI / 180, barRelease);
+                BarRelease barRelease = new BarRelease { StartRelease = startRelease, EndRelease = endRelease};
+                Bar bar = new Bar { Start = nd1, End = nd2, SectionProperty = prop, Release = barRelease, OrientationAngle = orientationAngle[0] * System.Math.PI / 180 };
+
                 SetAdapterId(bar, beamId);
                 beams.Add(bar);
             }

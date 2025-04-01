@@ -34,6 +34,8 @@ using BH.oM.Structure.Loads;
 using BH.oM.Geometry;
 using BH.oM.Geometry.CoordinateSystem;
 using BH.oM.Adapter.Strand7;
+using BH.oM.Structure.MaterialFragments;
+using System.Xml.Linq;
 
 namespace BH.Adapter.Strand7
 {
@@ -55,10 +57,10 @@ namespace BH.Adapter.Strand7
                 err = St7.St7GetLoadCaseType(1, ldCs, ref caseType);
                 if (!St7ErrorCustom(err, "Could not get a type of loadcase " + ldCs)) continue;
                 Loadcase ldcase = null;
-                if (caseType == St7.lcNoInertia) ldcase = BH.Engine.Structure.Create.Loadcase(loadCaseName.ToString(), ldCs);
-                else if (caseType == St7.lcAccelerations) ldcase = BH.Engine.Structure.Create.Loadcase(loadCaseName.ToString(), ldCs, LoadNature.Notional);
-                else if (caseType == St7.lcSeismic) ldcase = BH.Engine.Structure.Create.Loadcase(loadCaseName.ToString(), ldCs, LoadNature.Seismic);
-                else if (caseType == St7.lcGravity) ldcase = BH.Engine.Structure.Create.Loadcase(loadCaseName.ToString(), ldCs, LoadNature.Dead);               
+                if (caseType == St7.lcNoInertia) ldcase = new Loadcase { Name = loadCaseName.ToString(), Number = ldCs }; 
+                else if (caseType == St7.lcAccelerations) ldcase = new Loadcase { Name = loadCaseName.ToString(), Number = ldCs, Nature = LoadNature.Notional};
+                else if (caseType == St7.lcSeismic) ldcase = new Loadcase { Name = loadCaseName.ToString(), Number = ldCs, Nature = LoadNature.Seismic};
+                else if (caseType == St7.lcGravity) ldcase = new Loadcase { Name = loadCaseName.ToString(), Number = ldCs, Nature = LoadNature.Dead};
                 else BHError("Load Type is not supported");   
                 if (!(ldcase is null))
                 {

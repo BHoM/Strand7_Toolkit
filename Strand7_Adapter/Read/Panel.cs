@@ -82,9 +82,9 @@ namespace BH.Adapter.Strand7
                     Line ln1 = BH.Engine.Geometry.Create.Line(pt1, pt2);
                     Line ln2 = BH.Engine.Geometry.Create.Line(pt2, pt3);
                     Line ln3 = BH.Engine.Geometry.Create.Line(pt3, pt1);
-                    Edge edg1 = BH.Engine.Structure.Create.Edge(ln1, null, "");
-                    Edge edg2 = BH.Engine.Structure.Create.Edge(ln2, null, "");
-                    Edge edg3 = BH.Engine.Structure.Create.Edge(ln3, null, "");
+                    Edge edg1 = new Edge { Curve = ln1 };
+                    Edge edg2 = new Edge { Curve = ln2 };
+                    Edge edg3 = new Edge { Curve = ln3 };
                     SetAdapterId(edg1, plateConnection[1] - 1);
                     SetAdapterId(edg2, plateConnection[2] - 1);
                     SetAdapterId(edg3, plateConnection[3] - 1);        
@@ -102,10 +102,10 @@ namespace BH.Adapter.Strand7
                     Line ln2 = BH.Engine.Geometry.Create.Line(pt2, pt3);
                     Line ln3 = BH.Engine.Geometry.Create.Line(pt3, pt4);
                     Line ln4 = BH.Engine.Geometry.Create.Line(pt4, pt1);
-                    Edge edg1 = BH.Engine.Structure.Create.Edge(ln1, null, "");
-                    Edge edg2 = BH.Engine.Structure.Create.Edge(ln2, null, "");
-                    Edge edg3 = BH.Engine.Structure.Create.Edge(ln3, null, "");
-                    Edge edg4 = BH.Engine.Structure.Create.Edge(ln4, null, "");
+                    Edge edg1 = new Edge { Curve = ln1 };
+                    Edge edg2 = new Edge { Curve = ln2 };
+                    Edge edg3 = new Edge { Curve = ln3 };
+                    Edge edg4 = new Edge { Curve = ln4 };
                     SetAdapterId(edg1, plateConnection[1] - 1);
                     SetAdapterId(edg2, plateConnection[2] - 1);
                     SetAdapterId(edg3, plateConnection[3] - 1);

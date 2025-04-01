@@ -47,7 +47,7 @@ namespace BH.Adapter.Strand7
 
             // geometry
             List<Point> panelPoints = panel.ExternalEdges.Select(edg => (edg.Curve as Line).Start).ToList();
-            List<Node> panelNodes = panelPoints.Select(pt => BH.Engine.Structure.Create.Node(pt)).ToList();
+            List<Node> panelNodes = panelPoints.Select(pt => new Node { Position = pt }).ToList();
             List<Node> nodesPushed = Push(panelNodes).Cast<Node>().ToList();
             int[] connectionNodes = new int[panelNodes.Count + 1];
             connectionNodes[0] = nodesPushed.Count;
